@@ -1,0 +1,78 @@
+spring.profiles.active: dev
+
+hyigeia:
+  url: http://10.217.66.28:8080
+  gitlab: scm
+  jenkins: build
+  sonarqube: codequality #CodeQuality
+  nexus: artifact
+  ansible: deployment
+  orchestra: agileTool
+
+---
+
+spring:
+  profiles: dev
+  datasource:
+      url: jdbc:log4jdbc:postgresql://localhost:5432/test
+      username: postgres
+      password: 1234
+      driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      
+  jpa:
+      hibernate.ddl-auto: update
+      generate-ddl: true
+      show-sql: true
+      properties:
+        hibernate:
+          format_sql: true
+          use_sql_comments: true
+          default_batch_fetch_size: 1000 # MultipleBagFetchException 해결을 위한 옵션
+
+logging.level:
+  org:
+    springframework:
+      web: INFO
+      security: INFO
+      boot: INFO
+    hibernate:
+      SQL: OFF
+      type.descriptor.sql.BasicBinder: OFF
+
+server:
+  port: 8080
+
+
+---
+
+spring:
+  profiles: tbd
+  datasource:
+      url: jdbc:log4jdbc:postgresql://10.217.66.99:5432/dashboard
+      username: chelsea
+      password: chelsea123
+      driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      
+  jpa:
+      hibernate.ddl-auto: update
+      generate-ddl: true
+      show-sql: false
+      properties:
+        hibernate:
+          format_sql: false
+          use_sql_comments: false
+          default_batch_fetch_size: 1000 # MultipleBagFetchException 해결을 위한 옵션
+
+logging.level:
+  org:
+    springframework:
+      web: INFO
+      security: INFO
+      boot: INFO
+    hibernate:
+      SQL: OFF
+      type.descriptor.sql.BasicBinder: OFF
+
+server:
+  port: 8080
+
